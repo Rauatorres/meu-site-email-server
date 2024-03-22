@@ -2,7 +2,7 @@ module.exports = (app, req, res)=>{
     const emailConfigs = require('./emailConfigs')()
 
 
-    let data = req.body.mailerState
+    let data = req.body
 
     let mailOptions = {
         from: data.email,
@@ -19,8 +19,11 @@ l
     emailConfigs.sendMail(mailOptions, (error, info)=>{
         if(error){
             console.log(error)
+            res.send(error)
         }else{
             console.log('Email enviado: ' + info.response)
+            res.send('Email enviado: ' + info.response)
         }
     })
+
 }
